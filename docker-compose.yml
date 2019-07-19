@@ -1,0 +1,36 @@
+version: "3"
+
+volumes:
+  data:
+
+services:
+
+  Mysql:
+    image: mysql
+    ports:
+      - "3306:3306"
+    volumes:
+      - data:/var/www/
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "caixa"  
+    container_name: mysql
+    networks: 
+      - minha-rede
+
+  Aplicacao:
+    build:
+      dockerfile: ./caixa.dockerfile
+      context: .
+    image: lucasbpaixao/caixa
+    ports:
+      - "8080:8080"
+    container_name: Caixa
+    networks: 
+      - minha-rede
+    depends_on: 
+      - Mysql
+
+networks:
+  minha-rede:
+    driver: bridge 

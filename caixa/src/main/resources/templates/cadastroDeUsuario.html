@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Cadastro de Usuario</title>
+<link rel="stylesheet" href="bootstrap/compiler/bootstrap.css" />
+<link rel="stylesheet" href="bootstrap/compiler/style.css" />
+</head>
+<body>
+	<div class="container">
+		<img alt="Majority Caixa" src="images/majority-caixa.png" align="top" />
+		<div class="jumbotron" align="center" style="margin-top: 50px;">
+
+			<h1>Cadastro de Usuario</h1>
+
+			<div class="alert alert-danger" role="alert" th:each="erro: ${erros}">
+				<span th:text="${erro}"></span>
+			</div>
+
+			<form action="cadastrar" method="post">
+				<div class="form-group" align="left">
+					<label for="login">Login</label> <input type="text"
+						class="form-control" id="login" name="login"
+						aria-describedby="emailHelp" placeholder="Login"> </input>
+				</div>
+				
+				<div class="form-group" align="left">
+					<label for="email">Email</label> <input type="email"
+						class="form-control" id="email" name="email"
+						aria-describedby="emailHelp" placeholder="Email"> </input>
+				</div>
+				
+				<div class="form-group" align="left">
+					<label for="senha">Senha</label> <input type="password"
+						class="form-control" id="senha" name="senha" placeholder="Senha"></input>
+				</div>
+
+				<div class="form-group" align="left">
+					<label for="confirmarSenha">Confirme a sua Senha</label> <input
+						type="password" class="form-control" id="confirmarSenha"
+						name="confirmarSenha" placeholder="Confirme a sua Senha"></input>
+				</div>
+
+				<a href="/" class="stretched-link">Já possui cadastro?</a>
+				
+				<br /> 
+				<br />
+
+				<button type="submit" class="btn btn-primary">Cadastrar</button>
+			</form>
+		</div>
+	</div>
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+
+</body>
+</html>

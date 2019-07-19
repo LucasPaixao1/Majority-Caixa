@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html;" charset="UTF-8" />
+<title>Cadastro de Produtos</title>
+<link rel="stylesheet" href="bootstrap/compiler/bootstrap.css" />
+<link rel="stylesheet" href="bootstrap/compiler/style.css" />
+</head>
+<body class="bg-secondary">
+	<div class="container">
+		<img alt="Majority Caixa" src="images/majority-claro.png" align="top" />
+
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<a class="navbar-brand" href="menu"><h4>Majority Caixa</h4></a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active"><a class="nav-link"
+						href="registrarEntrada">Entrada no Estoque <span
+							class="sr-only">(current)</span></a></li>
+					<li class="nav-item active"><a class="nav-link" href="venda">Vendas
+							<span class="sr-only">(current)</span>
+					</a></li>
+					<li class="nav-item active"><a class="nav-link" href="estoque">Estoque
+							<span class="sr-only">(current)</span>
+					</a></li>
+				</ul>
+			</div>
+		</nav>
+
+		<div class="jumbotron" align="center" style="margin-top: 50px;">
+
+			<h1>Cadastro de Produtos</h1>
+
+			<div class="alert alert-danger" role="alert" th:each="erro: ${erros}">
+				<span th:text="${erro}"></span>
+			</div>
+
+			<div class="alert alert-success" role="alert"
+				th:each="alerta: ${alertas}">
+				<span th:text="${alerta}"></span>
+			</div>
+
+			<form action="verOqueFazer" method="post">
+
+				<div class="form-group" align="left">
+					<label for="id">Id</label> <input type="text" class="form-control"
+						id="id" name="id" aria-describedby="id" placeholder="Id"
+						autofocus="true"> <small id="emailHelp"
+						class="form-text text-muted">O Id só deve ser preenchido
+						você querer alterar algum produto, caso você queira cadastrar é de
+						suma importancia que você não o preencha.</small> </input>
+				</div>
+
+
+				<div class="form-group" align="left">
+					<label for="nomeProduto">Nome do Produto</label> <input type="text"
+						class="form-control" id="nomeProduto" name="nomeProduto"
+						aria-describedby="nomeProduto" placeholder="Nome do Produto"
+						required="true" autofocus="true"> </input>
+				</div>
+
+				<div class="form-group" align="left">
+					<label for="login">Marca</label> <input type="text"
+						class="form-control" id="marca" name="marca"
+						aria-describedby="marca" placeholder="Marca"></input>
+				</div>
+
+				<div class="form-group" align="left">
+					<label for="categoria">Categoria</label> <input type="text"
+						class="form-control" id="categoria" name="categoria"
+						aria-describedby="categoria" placeholder="Categoria"> </input>
+				</div>
+
+				<div class="form-group" align="left">
+					<label for="preco">Preço</label> <input type="text"
+						class="form-control" id="preco" name="preco"
+						aria-describedby="preco" placeholder="Preco"> </input>
+				</div>
+
+				<br /> <br />
+
+				<button type="submit" class="btn btn-primary btn-lg"
+					name="cadastrarProduto" value="cadastrarProduto">Cadastrar</button>
+				<button type="submit" class="btn btn-secondary btn-lg"
+					name="alterarProduto" value="alterarProduto">Alterar</button>
+
+
+			</form>
+
+			<br /> <br />
+			<h1>Produtos já Cadastrados</h1>
+			<br /> <br />
+
+			<nav class="navbar navbar-light bg-light">
+				<form class="form-inline">
+					<input class="form-control mr-sm-2" type="search"
+						placeholder="Persquisar um Produto" aria-label="Search" />
+					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+						<img alt="pesquisar" src="images/icons8-pesquisar-24.png"
+							align="top" />
+					</button>
+				</form>
+			</nav>
+
+			<br /> <br />
+
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th scope="col">Id</th>
+						<th scope="col">Nome</th>
+						<th scope="col">Marca</th>
+						<th scope="col">Categoria</th>
+						<th scope="col">Preço</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="produto : ${produtos}">
+						<td><span th:text="${produto.id}"></span></td>
+						<td><span th:text="${produto.nome}"></span></td>
+						<td><span th:text="${produto.marca}"></span></td>
+						<td><span th:text="${produto.categoria}"></span></td>
+						<td><span th:text="${produto.preco}"></span></td>
+						<td><span><a
+								th:href="@{'/excluirProduto/' + ${produto.id}}">
+									<button type="button" class="btn btn-success">Excluir</button>
+							</a></span></td>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+
+	</div>
+
+
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

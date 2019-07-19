@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html;" charset="UTF-8" />
+<title>Registrar Entrada</title>
+<link rel="stylesheet" href="bootstrap/compiler/bootstrap.css" />
+<link rel="stylesheet" href="bootstrap/compiler/style.css" />
+</head>
+<body class="bg-secondary">
+	<div class="container">
+		<img alt="Majority Caixa" src="images/majority-claro.png" align="top" />
+
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<a class="navbar-brand" href="menu"><h4>Majority Caixa</h4></a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active"><a class="nav-link" href="cadastroProdutos">Cadastro de Produtos<span class="sr-only">(current)</span></a></li>
+					<li class="nav-item active"><a class="nav-link" href="venda">Vendas <span class="sr-only">(current)</span></a></li>
+					<li class="nav-item active"><a class="nav-link" href="estoque">Estoque <span class="sr-only">(current)</span></a></li>
+				</ul>
+			</div>
+		</nav>
+
+		<div class="jumbotron" align="center" style="margin-top: 50px;">
+
+			<h1>Registrar Entrada</h1>
+
+			<div class="alert alert-danger" role="alert" th:each="erro: ${erros}">
+				<span th:text="${erro}"></span>
+			</div>
+
+			<div class="alert alert-success" role="alert"
+				th:each="alerta: ${alertas}">
+				<span th:text="${alerta}"></span>
+			</div>
+
+			<form action="cadastrarEntrada" method="post">
+
+<!-- 				<div class="form-group" align="left"> -->
+<!-- 					<label for="id">Id da Entrada</label> <input type="text" class="form-control" -->
+<!-- 						id="id" name="id" aria-describedby="id" placeholder="Id da Entrada" -->
+<!-- 						autofocus="true"> <small id="emailHelp" -->
+<!-- 						class="form-text text-muted">O Id da Entrada só deve ser preenchido -->
+<!-- 						você querer alterar alguma entrar, caso você queira cadastrar é de -->
+<!-- 						suma importancia que você não o preencha.</small> </input> -->
+<!-- 				</div> -->
+
+				<div class="form-group" align="left">
+					<label for="idProduto">Id do Produto</label> <input type="text" class="form-control"
+						id="idProduto" name="idProduto" aria-describedby="idProduto" placeholder="Id do Produto"
+						autofocus="true"></input>
+				</div>
+
+				<div class="form-group" align="left">
+					<label for="quantidade">Quantidade Entrada no Estoque</label> <input type="number"
+						class="form-control" id="quantidade" name="quantidade"
+						aria-describedby="quantidade" placeholder="Quantidade"> </input>
+				</div>
+
+				<br /> <br />
+
+				<button type="submit" class="btn btn-primary btn-lg"
+					name="cadastrarEntrada" value="cadastrarEntrada">Cadastrar</button>
+
+
+			</form>
+
+			<br /> <br />
+			<h1>Produtos</h1>
+			<br /> <br />
+
+			<nav class="navbar navbar-light bg-light">
+				<form class="form-inline" action="atualizarTabela">
+						<button type="submit" class="btn btn-primary">Atualizar Tabela</button>
+				</form>
+			</nav>
+
+			<br /> <br />
+
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th scope="col">Id</th>
+						<th scope="col">Id do Produto</th>
+						<th scope="col">Nome</th>
+						<th scope="col">Marca</th>
+						<th scope="col">Quantidade</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="entrada : ${entradas}">
+						<td><span th:text="${entrada.id}"></span></td>
+						<td><span th:text="${entrada.produto.id}"></span></td>
+						<td><span th:text="${entrada.produto.nome}"></span></td>
+						<td><span th:text="${entrada.produto.marca}"></span></td>
+						<td><span th:text="${entrada.quantidade}"></span></td>
+						<td><span><a th:href="@{'/excluirEntrada/' + ${entrada.id}}"> <button type="button" class="btn btn-success">Excluir</button> </a></span></td>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+
+	</div>
+
+
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>
